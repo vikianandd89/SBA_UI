@@ -1,0 +1,26 @@
+<form [formGroup]="searchCriteriaForm">
+    <div class="row p-2">
+        <div class="col-md-2 pt-2">
+            Select Project
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Select Project" formControlName="projectName" disabled />
+        </div>
+        <div class="col col-md-1">
+            <button type="button" class="btn btn-outline-primary" (click)="openModal(ActionType.ViewProject)">...</button>
+        </div>
+        <div class="col-md-1 pt-2">
+            Sort by
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <div class="btn-group" btnRadioGroup (click)="sortArray($event)">
+                    <label class="btn btn-secondary" [ngClass]="{'active': sortOrderType == SortOrder.StartDate}" [title]="SortOrder.StartDate" tabindex="0" role="button">Start date</label>
+                    <label class="btn btn-secondary" [ngClass]="{'active': sortOrderType == SortOrder.EndDate}" [title]="SortOrder.EndDate" tabindex="0" role="button">End date</label>
+                    <label class="btn btn-secondary" [ngClass]="{'active': sortOrderType == SortOrder.Priority}" [title]="SortOrder.Priority" tabindex="0" role="button">Priority</label>
+                    <label class="btn btn-secondary" [ngClass]="{'active': sortOrderType == SortOrder.Completed}" [title]="SortOrder.Completed" tabindex="0" role="button">Completed</label>
+                </div>
+                </div>
+        </div>
+    </div>
+</form>

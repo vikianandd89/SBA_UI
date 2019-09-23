@@ -1,0 +1,99 @@
+    <div class="panel panel-primary">
+        <div class="panel-heading h4 mt-2">Add Task</div>
+        <div class="panel-body">
+    <form class="form-horizontal" #f="ngForm">
+      <div class="form-group">
+          <label class="control-label" for="selectProject">Select project:</label>
+          <div class="row">
+              <div class="col col-lg-5">
+                  <input type="text" class="form-control" placeholder="Select project" [(ngModel)]="taskDetail.projectName"
+                      disabled name="selectProject"/>
+                  <small class="text-danger" *ngIf="!taskDetail.projectName">*Select project</small>
+              </div>
+              <div class="col col-lg-2">
+                  <button type="button" class="btn btn-outline-primary" (click)="showProjectModal()">...</button>
+              </div>
+          </div>      
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="taskName">Task:</label>
+        <div class="row">
+          <div class="col-md-5">
+            <input type="text" class="form-control" id="taskName" name="taskName"  
+            [(ngModel)]="taskDetail.name" required placeholder="Enter Task">
+              <small class="text-danger" *ngIf="!taskDetail.name">*Enter Task name</small>
+          </div>
+          <div class="col col-lg-2 pt-2">
+              <div class="checkbox">
+                  <input type="checkbox" id="isParentTask" name="isParentTask" [(ngModel)]="isParentTask" (click)="onParentTaskSelection($event)" /> 
+                  <label class="form-check-label pl-2" for="isParentTask">Is parent task ?</label>
+              </div>
+          </div>
+      </div>
+      </div>
+      <div class="form-group">
+          <label class="control-label" for="taskpriority">Priority:(0-30)</label>      
+          <div class="slidecontainer">       
+          <input type="range" min="1" max="30"
+            [(ngModel)]="taskDetail.priority" required class="slider" id="rangePriority" 
+            name="rangePriority" [disabled]="isParentTask"></div>      
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="taskStartDate">Parent Task:</label>
+            <select class="form-control" id="parentTask" name="parentTask" 
+                [(ngModel)]="taskDetail.parentTaskId" [disabled]="isParentTask">
+              <option [ngValue]="undefined" selected>Please select parent task</option>
+              <option *ngFor="let taskDetail of taskDetails" value="{{taskDetail.id}}">{{taskDetail.name}}</option>
+            </select>      
+        </div>   
+      <div class="form-group">
+        <label class="control-label" for="taskStartDate">Start Date:</label>
+          <input type="date" class="form-control" id="taskStartDate"
+          [ngModel]="taskDetail.startDate |date :'yyyy-MM-dd'" [(ngModel)]="taskDetail.startDate"
+            name="taskStartDate" required placeholder="Enter start date" [disabled]="isParentTask">
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="taskEndDate">End Date:</label>
+          <input type="date" class="form-control" id="taskEndDate"
+            [ngModel]="taskDetail.endDate |date :'yyyy-MM-dd'" [(ngModel)]="taskDetail.endDate"
+            name="taskEndDate" required placeholder="Enter end date" [disabled]="isParentTask">
+      </div>
+      <div class="form-group">
+          <label class="control-label" for="selectUser">Select user:</label>
+          <div class="row">
+              <div class="col col-lg-5">
+                  <input type="text" class="form-control" placeholder="Select user" 
+                  [(ngModel)]="taskDetail.userName" name="userName"
+                      disabled />
+              </div>
+              <div class="col col-lg-2">
+                  <button type="button" class="btn btn-outline-primary" (click)="showUserModal()">...</button>
+              </div>
+          </div>
+      </div>
+      <div class="form-group"> 
+          <button type="submit"  [disabled]="!f.valid" (click)="onAddTask()" class="btn btn-primary">Add Task</button> &nbsp;
+          <button type="button" class="btn btn-warning"  (click)="onResetTask()">Reset</button>
+      </div>
+  
+      <button type="button" #showmodal  class="btn btn-info btn-lg" style="display: none;"
+        id="showmodal" data-toggle="modal" data-target="#modalPopUp">Open Modal</button>
+      <div id="modalPopUp" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close"  (click) ="closeModal()" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Task Manager Alert</h4>
+            </div>
+            <div class="modal-body">
+              <p><strong>{{this.results}}</strong></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" (click) ="closeModal()" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

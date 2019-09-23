@@ -1,0 +1,18 @@
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-brand">
+      <a href="#"><h2>Task Manager</h2></a>
+    </div>
+    <div class="container-fluid">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link active" style="cursor: pointer;" routerLink="/view">View task</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/add" style="cursor: pointer;">Add task</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/view-project" style="cursor: pointer">Add Project</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/view-user" style="cursor: pointer">Add User</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+      <router-outlet></router-outlet>
+  </div>
+</div>

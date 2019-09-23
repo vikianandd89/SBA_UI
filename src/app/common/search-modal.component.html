@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Select valid item from the list</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="onSelection(null)">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <ng-container *ngIf="actionType === ActionType.ViewParentTask">
+        <div class="list-group" *ngFor="let item of parentTasks">
+            <button type="button" class="btn btn-link list-group-item list-group-item-action" (click)="onSelection(item.parentId)">{{item?.parentTaskName}}</button>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="actionType === ActionType.ViewProject">
+        <div class="list-group" *ngFor="let item of projects">
+            <button type="button" class="btn btn-link list-group-item list-group-item-action" (click)="onSelection(item.id)">{{item?.name}}</button>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="actionType === ActionType.ViewUser">
+        <div class="list-group" *ngFor="let item of users">
+            <button type="button" class="btn btn-link list-group-item list-group-item-action" (click)="onSelection(item.id)">{{item?.firstName}}</button>
+        </div>
+    </ng-container>
+</div>

@@ -1,0 +1,73 @@
+<div class="panel panel-primary">
+    <div class="panel-heading h4 mt-2">Add Project</div>
+    <div class="panel-body">
+        <form [formGroup]="projectForm">
+            <div class="form-group">
+                <label class="control-label" for="name">Project Name</label>
+                <input type="text" class="form-control" placeholder="Enter first name" formControlName="name" />
+                <small class="text-danger" *ngIf="ProjectNameControl.invalid">*Enter a valid name</small>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <input type="checkbox" id="enableDates" formControlName="enableDates"/> 
+                    <label class="form-check-label" for="enableDates">&nbsp;&nbsp;&nbsp;Enable dates</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-5">
+                        <input placeholder="Start date in DD/MM/YYYY" class="form-control" placement="right" #dp="bsDatepicker"
+                            bsDatepicker formControlName="startDate" [attr.disabled]="isEnableDatesNotSelected"
+                            [minDate]="minStartDate"
+                            [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-default' }">
+                        <small class="text-danger" *ngIf="StartDateControl.invalid">*Start date is mandatory</small>
+                    </div>
+                    <div class="col-md-5">
+                        <input placeholder="End date in DD/MM/YYYY" class="form-control" placement="right" #dp="bsDatepicker"
+                            bsDatepicker formControlName="endDate" [attr.disabled]="isEnableDatesNotSelected" [minDate]="minEndDate"
+                            [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-default' }">
+                        <small class="text-danger" *ngIf="EndDateControl.invalid">*End date is required and should be greater
+                            than Start date</small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="projectRangePriority">Priority:(0-30)</label>      
+                <div class="slidecontainer">       
+                    <input type="range" min="1" max="30" formControlName="priority"
+                        required class="slider" id="projectRangePriority" name="projectRangePriority">
+                </div>           
+            </div>
+            <form [formGroup]="projectForm.get('user')">
+                <div class="form-group">
+                    <label class="control-label" for="selectUser">Select user:</label>
+                    <div class="row p-2">
+                        <div class="col col-lg-5">
+                            <input type="text" class="form-control" placeholder="Select User" formControlName="firstName"
+                                disabled />
+                            <small class="text-danger" *ngIf="FirstNameControl.invalid">*Select User</small>
+                        </div>
+                        <div class="col col-lg-2">
+                            <button type="button" class="btn btn-outline-primary" (click)="openModal()">...</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row p-2 mt-2">
+                <div class="col-sm">
+                    <input class="btn btn-primary" [disabled]="!projectForm.valid" type="button" value="Save Project" (click)="save()" />
+                    <input class="btn btn-secondary ml-5" type="button" value="Reset" (click)="reset()" />
+                </div>
+            </div>
+            <br />
+            <div class="alert alert-success w-50" role="alert" *ngIf="status === Status.Added">
+                New project added successfully.
+            </div>
+            <div class="alert alert-success w-50" role="alert" *ngIf="status === Status.Updated">
+                Selected project updated successfully.
+            </div>
+            <hr />
+        </form>
+    </div>
+</div>

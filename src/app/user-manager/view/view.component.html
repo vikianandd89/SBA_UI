@@ -1,0 +1,49 @@
+<div class="panel panel-primary">
+    <div class="panel-heading h4 mt-2">Add User</div>
+    <div class="panel-body">
+        <add-user [userForm]="userForm" (onSave)="getUsers()"></add-user>
+        <div class="container">
+            <form [formGroup]="userForm">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col">
+                                <p class="font-weight-bold">First name</p>
+                            </div>
+                            <div class="col">
+                                <p class="font-weight-bold">Last name</p>
+                            </div>
+                            <div class="col">
+                                <p class="font-weight-bold">Employee Id</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <p class="font-weight-bold">Action</p>
+                    </div>
+                </div>
+                <div *ngFor="let item of users">
+                    <div class="row mb-2">
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col">
+                                    <p>{{item.firstName}}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{item.lastName}}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{item.employeeId}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <input class="btn btn-secondary" type="button" value="Edit" (click)="edit(item)" />
+                            <input class="btn btn-secondary ml-3" type="button" value="Delete" (click)="delete(item)" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

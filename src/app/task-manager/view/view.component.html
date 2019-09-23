@@ -1,0 +1,65 @@
+<div class="panel panel-primary">
+    <h5 class="mt-3">Search tasks</h5>
+    <search-tasks [searchCriteriaForm]="searchCriteriaForm"></search-tasks>
+    <hr/>
+    <div class="panel-body">
+        <p class="alert alert-danger" *ngIf="showError">{{results}}</p>
+        <div class="panel-heading h5 mt-2">View Tasks</div>
+        <div class="my-3 border-bottom" *ngFor="let task of searchResponse">
+            <div class="row">
+                <div class="col-12 col-md-8 col-lg-12">
+                    <div class="row">
+                        <div class="col-6 col-md-4 col-lg-2">
+                            <p class="font-weight-bold">Task</p>
+                            <p>{{task.name}}</p>
+                        </div>
+                        <div class="col-6 col-md-5 col-lg-3">
+                            <p class="font-weight-bold">Parent Task</p>
+                            <p>{{task?.parentName}}</p>
+                        </div>
+                        <div class="col-6 col-md-3 col-lg-1">
+                            <p class="font-weight-bold">Priority</p>
+                            <p>{{task.priority}}</p>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-2">
+                            <p class="font-weight-bold">Start</p>
+                            <p>{{task.startDate | date: "dd/MM/yyyy"}}</p>
+                        </div>
+                        <div class="col-6 col-md-5 col-lg-1" *ngIf="!task.endTask">
+                            <p class="font-weight-bold">End</p>
+                            <p>{{task.endDate === null ? "" : task.endDate | date: "dd/MM/yyyy"}}</p>
+                        </div>
+                        <div class="col-6 col-md-5 col-lg-1" *ngIf="task.endTask">
+                            <p class="font-weight-bold">End</p>
+                            <p>Closed</p>
+                        </div>
+                        <div class="col-lg-3 pt-0 justify-content-center align-self-center">
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-primary mr-lg-3" [disabled]="task.endTask" [routerLink]="['/project-manager/update-task', task.taskId]">Edit</button>
+                                <button class="btn btn-secondary" [disabled]="task.endTask" (click)="endTask(task.id)">End Task</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" #showmodal  class="btn btn-info btn-lg" style="display: none;"
+            id="showmodal" data-toggle="modal" data-target="#modalPopUp">Open Modal</button>
+        <div id="modalPopUp" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title float-left">Alert</h4>
+                        <button type="button" class="close float-right" (click) ="closeModal()" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>{{this.results}}</strong></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" (click) ="closeModal()" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
