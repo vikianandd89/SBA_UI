@@ -12,7 +12,7 @@ import { TaskManagerService } from './task-manager/providers/task-manager.servic
 import { ViewComponent } from './task-manager/view/view.component';
 import { SearchPipe } from './task-manager/providers/search.pipe';
 import { EditComponent } from './task-manager/edit/edit.component';
-import { AddProjectComponent } from './project-manager/Add/add.component';
+import { AddProjectComponent } from './project-manager/add/add.component';
 import { ViewProjectComponent } from './project-manager/view/view.component';
 import { BsDatepickerModule, ModalModule } from "ngx-bootstrap";
 import { ProjectManagerService } from './project-manager/providers/project-manager.service';
